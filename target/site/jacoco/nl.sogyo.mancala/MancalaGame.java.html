@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MancalaGame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Mancala</a> &gt; <a href="index.source.html" class="el_package">nl.sogyo.mancala</a> &gt; <span class="el_source">MancalaGame.java</span></div><h1>MancalaGame.java</h1><pre class="source lang-java linenums">package nl.sogyo.mancala;
+
+<span class="nc" id="L3">public class MancalaGame implements Mancala {</span>
+<span class="nc" id="L4">    private static Bowl bowl = new Bowl();</span>
+    public String getPlayerName(int playerIndex) throws IllegalStateException {
+<span class="nc bnc" id="L6" title="All 2 branches missed.">        if(playerIndex==1){</span>
+<span class="nc" id="L7">            return bowl.getOwner().getName();</span>
+<span class="nc bnc" id="L8" title="All 2 branches missed.">        } else if(playerIndex==2) {</span>
+<span class="nc" id="L9">            return bowl.getOwner().getOpponent().getName();</span>
+        } else {
+<span class="nc" id="L11">            throw new IllegalStateException();</span>
+        }
+    }
+
+    public void setPlayerName(String name, int playerIndex) throws IllegalStateException {
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        if(playerIndex==1){</span>
+<span class="nc" id="L17">            bowl.getOwner().setName(name);</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        } else if(playerIndex==2) {</span>
+<span class="nc" id="L19">            bowl.getOwner().getOpponent().setName(name);</span>
+        } else {
+<span class="nc" id="L21">            throw new IllegalStateException();</span>
+        }
+<span class="nc" id="L23">    }</span>
+
+    public boolean isToMovePlayer(int playerIndex) throws IllegalStateException {
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        if(playerIndex==1){</span>
+<span class="nc" id="L27">            return bowl.getOwner().getIsMyTurn();</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        } else if(playerIndex==2) {</span>
+<span class="nc" id="L29">            return bowl.getOwner().getOpponent().getIsMyTurn();</span>
+        } else {
+<span class="nc" id="L31">            throw new IllegalStateException();</span>
+        }
+    }
+
+    public int[] playRecess(int index) {
+<span class="nc" id="L36">        AbstractBowl bowlToPlay = bowl.getNeighbour(index-1);</span>
+<span class="nc bnc" id="L37" title="All 6 branches missed.">        if (bowlToPlay.getOwner().getIsMyTurn() &amp;&amp; (bowlToPlay instanceof Bowl) &amp;&amp; bowlToPlay.getBeads()!=0){</span>
+<span class="nc" id="L38">            ((Bowl) bowlToPlay).play();</span>
+        }
+<span class="nc" id="L40">        return showBoard();</span>
+    }
+
+    public int getStonesForPit(int index) {
+<span class="nc" id="L44">        return bowl.getNeighbour(index-1).getBeads();</span>
+    }
+
+    public int[] exportGameState() {
+<span class="nc" id="L48">        return showBoard();</span>
+    }
+
+    public boolean isEndOfGame() {
+<span class="nc" id="L52">        return bowl.isSideCurrentPlayerEmpty();</span>
+    }
+
+    public String getWinnersName() {
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if(!isEndOfGame()){return null;}</span>
+<span class="nc" id="L57">        int beadsPlayer1 = bowl.getNeighbour(6).getBeads();</span>
+<span class="nc" id="L58">        int beadsPlayer2 = bowl.getNeighbour(13).getBeads();</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if(beadsPlayer1 &gt; beadsPlayer2){</span>
+<span class="nc" id="L60">            return bowl.getNeighbour(6).getOwner().getName();</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        } else if(beadsPlayer2 &gt; beadsPlayer1) {</span>
+<span class="nc" id="L62">            return bowl.getNeighbour(13).getOwner().getName();</span>
+<span class="nc" id="L63">        } else {return &quot;It's a tie!&quot;;}</span>
+    }
+
+    private int[] showBoard(){
+<span class="nc" id="L67">        int[] boardStatus = new int[15];</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        for(int i=0;i&lt;14;i++){</span>
+<span class="nc" id="L69">            boardStatus[i] = bowl.getNeighbour(i).getBeads();</span>
+        }
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        boardStatus[14] = (bowl.getOwner().getIsMyTurn() ? 1 : 2);</span>
+<span class="nc" id="L72">        return boardStatus;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

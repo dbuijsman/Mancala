@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MancalaPlay.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Mancala</a> &gt; <a href="index.source.html" class="el_package">nl.sogyo.mancala</a> &gt; <span class="el_source">MancalaPlay.java</span></div><h1>MancalaPlay.java</h1><pre class="source lang-java linenums">package nl.sogyo.mancala;
+import java.util.Scanner;
+
+<span class="nc" id="L4">public class MancalaPlay {</span>
+<span class="nc" id="L5">    private static Bowl bowl = new Bowl();</span>
+    public static void main(String[] args) {
+<span class="nc" id="L7">        boolean gameOver = false;</span>
+<span class="nc bnc" id="L8" title="All 2 branches missed.">        while(!gameOver){</span>
+<span class="nc" id="L9">            showBoard();</span>
+<span class="nc" id="L10">            Bowl selectedBowl = selectBowl();</span>
+<span class="nc" id="L11">            selectedBowl.play();</span>
+<span class="nc" id="L12">            gameOver = bowl.isSideCurrentPlayerEmpty();</span>
+<span class="nc" id="L13">        }</span>
+<span class="nc" id="L14">        showBoard();</span>
+<span class="nc" id="L15">        Player winner = winner();</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        if(winner == null){</span>
+<span class="nc" id="L17">            System.out.print(&quot;It's a tie.&quot;);</span>
+        } else {
+<span class="nc" id="L19">            System.out.print(&quot;Congratulations &quot; + winner.getName() + &quot;: you have won!&quot;);</span>
+        }
+
+<span class="nc" id="L22">    }</span>
+    private static Bowl selectBowl(){
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if(bowl.getOwner().getIsMyTurn()){</span>
+<span class="nc" id="L25">            System.out.print(bowl.getOwner().getName() + &quot;;&quot;);</span>
+        } else {
+<span class="nc" id="L27">            System.out.print(bowl.getOwner().getOpponent().getName() + &quot;:&quot;);</span>
+        }
+<span class="nc" id="L29">        System.out.print(&quot; select the bowl you want to play: &quot;);</span>
+<span class="nc" id="L30">        AbstractBowl selectedBowl = bowl.getNeighbour(input());</span>
+<span class="nc bnc" id="L31" title="All 8 branches missed.">        if (!selectedBowl.getOwner().getIsMyTurn() | !(selectedBowl instanceof Bowl) | selectedBowl.getBeads()==0){</span>
+<span class="nc" id="L32">            System.out.print(&quot;This bowl is not playable. &quot;);</span>
+<span class="nc" id="L33">            selectedBowl = selectBowl();</span>
+        }
+<span class="nc" id="L35">        return (Bowl) selectedBowl;</span>
+    }
+    private static int input(){
+<span class="nc" id="L38">        Scanner input = new Scanner(System.in);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        while (!input.hasNextInt()){</span>
+<span class="nc" id="L40">            System.out.print(&quot;Please enter a integer: &quot;);</span>
+<span class="nc" id="L41">            input.next();</span>
+        }
+<span class="nc" id="L43">        return input.nextInt();</span>
+    }
+    private static void showBoard(){
+<span class="nc" id="L46">        spacingLengthBeadsInKalahaPlayer2();</span>
+<span class="nc" id="L47">        System.out.print(&quot; |&quot;);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        for(int counter=12;counter&gt;6;counter--){</span>
+<span class="nc" id="L49">            spacingBowl(counter);</span>
+<span class="nc" id="L50">            System.out.print(bowl.getNeighbour(counter).getBeads() + &quot; |&quot;);</span>
+        }
+<span class="nc" id="L52">        System.out.println(&quot;  &quot;);</span>
+<span class="nc" id="L53">        System.out.println(bowl.getNeighbour(13).getBeads() + &quot; |---|---|---|---|---|---| &quot; + bowl.getNeighbour(6).getBeads());</span>
+<span class="nc" id="L54">        spacingLengthBeadsInKalahaPlayer2();</span>
+<span class="nc" id="L55">        System.out.print(&quot; |&quot;);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        for(int counter=0;counter&lt;6;counter++){</span>
+<span class="nc" id="L57">            spacingBowl(counter);</span>
+<span class="nc" id="L58">            System.out.print(bowl.getNeighbour(counter).getBeads() + &quot; |&quot;);</span>
+        }
+<span class="nc" id="L60">        System.out.println(&quot;  &quot;);</span>
+<span class="nc" id="L61">    }</span>
+    private static void spacingLengthBeadsInKalahaPlayer2(){
+<span class="nc" id="L63">        AbstractBowl kalahaPlayer2 = bowl.getNeighbour(13);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        for(int counter=0;counter&lt;String.valueOf(kalahaPlayer2.getBeads()).length();counter++){</span>
+<span class="nc" id="L65">            System.out.print(&quot; &quot;);</span>
+        }
+<span class="nc" id="L67">    }</span>
+    private static void spacingBowl(int bowlNumber){
+<span class="nc" id="L69">        Bowl printingBowl = (Bowl) bowl.getNeighbour(bowlNumber);</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if(printingBowl.getBeads() &lt; 10){</span>
+<span class="nc" id="L71">            System.out.print(&quot; &quot;);</span>
+        }
+<span class="nc" id="L73">    }</span>
+    private static Player winner(){
+<span class="nc" id="L75">        int beadsPlayer1 = bowl.getNeighbour(6).getBeads();</span>
+<span class="nc" id="L76">        int beadsPlayer2 = bowl.getNeighbour(13).getBeads();</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        if(beadsPlayer1 &gt; beadsPlayer2){</span>
+<span class="nc" id="L78">            return bowl.getNeighbour(6).getOwner();</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        } else if(beadsPlayer2 &gt; beadsPlayer1) {</span>
+<span class="nc" id="L80">            return bowl.getNeighbour(13).getOwner();</span>
+<span class="nc" id="L81">        } else {return null;}</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
