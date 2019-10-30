@@ -1,0 +1,9 @@
+nl\sogyo\mancala\domain\MancalaImplemented.class
+nl\sogyo\mancala\domain\AbstractBowl.class
+nl\sogyo\mancala\domain\Bowl.class
+nl\sogyo\mancala\api\MancalaGame.class
+nl\sogyo\mancala\api\PlayerData.class
+nl\sogyo\mancala\api\JSONResultProcessor.class
+nl\sogyo\mancala\api\MancalaInitialize.class
+nl\sogyo\mancala\domain\Kalaha.class
+nl\sogyo\mancala\domain\Player.class

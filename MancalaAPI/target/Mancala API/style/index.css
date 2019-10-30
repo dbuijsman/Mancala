@@ -1,0 +1,55 @@
+.winner {
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);   -webkit-background-clip: text;
+    color: transparent;
+  }
+
+.board {
+    background-image: url(img/wood.jpg);
+    border-radius: 17%;
+    padding: 27px 13px;
+    width: 720px;
+    margin: auto;
+}
+
+.names {
+    font-size: 80px;
+    margin: auto;
+    text-align: center;
+}
+
+.player1 {
+    display:block;
+}
+.player2 {
+    display:block;
+    margin-top:30px;
+}
+
+.player1 .kalaha {
+    vertical-align:top;
+    margin-top: -112px;
+}
+.player2 .kalaha {
+    float:left;
+    vertical-align:bottom;
+}
+
+.kalaha, .bowl {
+    font-size: 42px;
+    background-image: url("img/bowl.jpg");
+    background-size: 135% 123%;
+    background-position: center;
+    border: none;
+    border-radius:50%;
+    text-align:center;
+}
+.bowl :hover {
+    opacity: 0.7;
+}
+.kalaha {
+    padding: 86px 30px;
+}
+.bowl {
+    padding: 30px 30px;
+    max-width: 84px;
+}
